@@ -5,8 +5,8 @@ const Header =({setView}) => {
         <div className="header">
             <h1>Doggies and more doggies</h1>
             <div className="buttons">
-                <span onClick={() => {setView('Breed List')}}> Breed List </span>
-                <span onClick={() => {setView('Random Dogs')}}>Random Dog Pictures</span>
+                <button onClick={() => {setView('breed list')}}> Breed List </button>
+                <button onClick={() => {setView('random dogs')}}>Random Dog Pictures</button>
             </div>
         </div>
     )

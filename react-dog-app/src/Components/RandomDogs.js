@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 
-const RandomDogs = ({setRandoDogBreed, getRandoDog, randoDog}) => {
-    const [randoBreedName, setRandoBreedName] = useState('')
+const RandomDogs = ({setRandoDogBreed, getRandoDog, randoDog, randoDogBreed}) => {
 
     const handleChange = (e) => {
-        setRandoBreedName(e.target.value)
+        setRandoDogBreed(e.target.value)
     }
 
-    const handleSubmit = () => {
-        setRandoDogBreed(randoBreedName)
+    function handleSubmit(e) {
+        e.preventDefault()
         getRandoDog()
     }
 
@@ -16,7 +15,7 @@ const RandomDogs = ({setRandoDogBreed, getRandoDog, randoDog}) => {
         <div className="dog-pics">
             <h1>Random Dogs Pictures!</h1>
             <div className="form">
-                <input type='text' placeholder='Enter dog breed here' onChange={handleChange}></input>
+                <input type='text' value={randoDogBreed}  placeholder='Enter dog breed here' onChange={handleChange}></input>
                 <button onClick={handleSubmit}>Search for dogs!</button>
             </div>
             {randoDog && <img src={randoDog} alt='dog'></img>}

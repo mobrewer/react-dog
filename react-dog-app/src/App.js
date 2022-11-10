@@ -5,10 +5,10 @@ import Header from "./Components/Header";
 import RandomDogs from "./Components/RandomDogs";
 
   function App() {
-    const [randoDog, setRandoDog] = useState()
+    const [randoDog, setRandoDog] = useState('')
     const [breed, setBreed] = useState('')
-    const [randoDogBreed, setRandoDogBreed] = useState()
-    const [currentView, setCurrentView] =useState()
+    const [randoDogBreed, setRandoDogBreed] = useState('')
+    const [currentView, setCurrentView] =useState('')
 
     const setView = str => {
       setCurrentView(str)
@@ -20,11 +20,7 @@ import RandomDogs from "./Components/RandomDogs";
       .then(res => setBreed(res))
     }
 
-    useEffect(() => {
-      getRandoDog()
-    }, [randoDog])
-
-    const getRandoDog =() => {
+    function getRandoDog() {
       axios.get(`https://dog.ceo/api/breed/${randoDogBreed}/images/random`)
       .then(res => setRandoDog(res.data.message))
     }
