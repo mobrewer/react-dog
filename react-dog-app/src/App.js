@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import BreedList from "./BreedList";
+import Header from "./Header";
+import RandomDogs from "./RandomDogs";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  function App() {
+    const [randoDog, setRandoDog] = useState()
+    const [breed, setBreed] = useState('')
+    const [randoDogBreed, setRandoDogBreed] = useState()
+    const [currentView, setCurrentView] =useState()
+
+    const setView = str => {
+      setCurrentView(str)
+    }
+    
+    const fetchBreed = () => {
+      axios.get('https://dog.ceo/api/breeds/list/all')
+      .then(res => (Object.entries(res.data.message)))
+      .then(res => setBreed(res))
+    }
+
+    useEffect(() => {
+      getRandoDog()
+    }, [randoDog])
+
+    const getRandoDog =() => {
+      axios.get(`https://dog.ceo/api/breed/${randoDogBreed}/images/random`)
+      .then(res => setRandoDog(res.data.message))
+    }
+
+    return (
+      <div className="App">
+        <Header setView={setView}/>
+        {currentView === 'random dogs' ? <RandomDogs randoDogBreed={randoDogBreed} randoDog={randoDog} getRandoDog={getRandoDog} setRandoDogBreed ={setRandoDogBreed} /> : <BreedList breed={breed} fetchBreed={fetchBreed}/>}
+      </div>
+    )
 }
-
-export default App;
+  export default App
