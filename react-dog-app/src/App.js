@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import BreedList from "./BreedList";
-import Header from "./Header";
-import RandomDogs from "./RandomDogs";
+import BreedList from "./Components/BreedList";
+import Header from "./Components/Header";
+import RandomDogs from "./Components/RandomDogs";
 
   function App() {
     const [randoDog, setRandoDog] = useState()
